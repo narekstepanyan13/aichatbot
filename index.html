@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>🎬 MovieLover AI</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="app">
+
+        <!-- Sidebar conversation history -->
+        <aside class="sidebar">
+            <h2>Conversations</h2>
+            <div class="sidebar-buttons">
+                <button id="new-chat">➕ New Chat</button>
+                <button id="delete-chat">🗑 Delete Chat</button>
+            </div>
+            <ul id="history"></ul>
+        </aside>
+
+        <!-- Main chat area -->
+        <main class="chat-container">
+            <header>
+                <h1>🎬 MovieLover AI</h1>
+                <p>Your personal movie assistant</p>
+            </header>
+
+            <div id="chat" class="chat"></div>
+
+            <form id="chat-form">
+                <button type="button" id="mic-button"><i class="fa-solid fa-microphone"></i></button>
+                <input type="text" id="user-input" placeholder="Ask a movie..." autocomplete="off">
+                <input type="file" id="file-input" style="display:none;" multiple>
+                <button type="button" id="file-button"><i class="fa-solid fa-paperclip"></i></button>
+                <button type="submit" id="send-button"><i class="fa-solid fa-paper-plane"></i></button>
+            </form>
+
+        </main>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,8 +1,16 @@
 from dotenv import load_dotenv
 from openai import OpenAI
+from supabase import create_client
+import os
 
 load_dotenv()
-client = OpenAI()
+
+SUPABASE_URL =os.env.get("SUPABASE_URL")
+SUPABASE_SERVICE_ROLE_KEY=os.environ.get("SUPABASE_SERVICE_ROLE_KEY")
+sb= create_client(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY)
+
+
+client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
 SYSTEM_PROMPT = """
 You are MovieLover AI, a professional assistant for movie lovers.
@@ -33,6 +41,23 @@ user_preferences = {
     "era": None,
     "liked_movies": set()
 }
+
+def embed_query(text: str) -> list[float]:
+    response = client.embeddings.create(
+        model="text-embedding-3-small",
+        input=text
+    )
+
+    return response.data[0].embedding
+
+# takes as input a query, conducts the search, returns context
+def semantic_search(query_text: str) -> list[dict]:
+    emb_q = embed_query(query_text)
+    res = sb.rpc("match_chunks", {"query_embedding": emb_q, "match_count" :5}).execute()
+    rows = res.data or []
+    # for easier debugging
+    print("RAG OUTPUT:", rows)
+    return rows
 
 def extract_preferences(text: str):
     genres = [
