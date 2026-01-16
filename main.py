@@ -4,7 +4,13 @@ from pydantic import BaseModel
 from dotenv import load_dotenv
 from openai import OpenAI
 from supabase import create_client
+from functools import lru_cache
 import os
+
+@lru_cache(maxsize=128)
+def embed_query_cached(text: str) -> list[float]:
+    return embed_query(text)
+
 
 load_dotenv()
 
@@ -54,7 +60,7 @@ def semantic_search(query_text: str) -> list[dict]:
         return []
     
     try:
-        res = sb.rpc("match_chunks", {"query_embedding": emb_q, "match_count": 5}).execute()
+        res = sb.rpc("match_chunks", {"query_embedding": emb_q, "match_count": 3}).execute()
         rows = res.data or []
         print("Supabase RAG OUTPUT:", rows)
         return rows
@@ -76,7 +82,7 @@ class ChatRequest(BaseModel):
     message: str
 
 @app.post("/chat")
-def chat(req: ChatRequest):
+async def chat(req: ChatRequest):
     user_message = req.message
 
     # Conduct semantic search
@@ -101,17 +107,23 @@ def chat(req: ChatRequest):
     user_msg = {"role": "user", "content": user_message}
 
     # Full conversation including system prompt
-    full_messages = [
-        {"role": "system", "content": SYSTEM_PROMPT},
-        rag_message,
-        user_msg
-    ]
+    full_prompt = f"""
+    {SYSTEM_PROMPT}
+
+    RETRIEVED CONTEXT:
+    {context if context else '(no matches)'}
+
+    User: {user_message}
+
+    Answer concisely:
+    """
+
 
     # Call OpenAI responses API
     try:
         response = client.responses.create(
             model="gpt-5-nano",
-            input=full_messages
+            input=full_prompt
         )
 
         # Extract the reply text safely
