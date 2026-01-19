@@ -117,18 +117,17 @@ main.py Explained
         ...
     ```
 
-    Workflow:
+    #### Workflow:
 
-    ###
-    1. Receives user input
+        1. Receives user input
 
-    2. Performs semantic search in Supabase
+        2. Performs semantic search in Supabase
 
-    3. Combines system prompt + retrieved context + user query
+        3. Combines system prompt + retrieved context + user query
 
-    4. Calls OpenAI gpt-5-nano model
+        4. Calls OpenAI gpt-5-nano model
 
-    5. Returns the reply as JSON
+        5. Returns the reply as JSON
 
 10. Serve Frontend Files
 
