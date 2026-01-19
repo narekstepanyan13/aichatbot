@@ -59,7 +59,7 @@ main.py Explained
     ...
     """
     ```
-        ### AI Behavior Guidelines
+       ### AI Behavior Guidelines
             • Guides AI behavior:
 
             • Recommend max 5 movies
