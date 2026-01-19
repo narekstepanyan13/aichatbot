@@ -11,7 +11,8 @@ This is the FastAPI backend for MovieLover AI, a professional assistant for movi
 
 main.py Explained
 1. Imports and Setup
-**```python**
+
+```python
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, RedirectResponse
@@ -21,7 +22,6 @@ from openai import OpenAI
 from supabase import create_client
 from functools import lru_cache
 import os
-**```**
 
 
 • Loads all required modules for FastAPI, environment, AI, Supabase, and caching.
