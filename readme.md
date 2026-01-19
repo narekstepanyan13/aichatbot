@@ -119,7 +119,7 @@ main.py Explained
 
     Workflow:
 
-    ```bash
+    ###
     1. Receives user input
 
     2. Performs semantic search in Supabase
@@ -129,7 +129,6 @@ main.py Explained
     4. Calls OpenAI gpt-5-nano model
 
     5. Returns the reply as JSON
-    ```
 
 10. Serve Frontend Files
 
