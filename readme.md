@@ -22,6 +22,7 @@ from openai import OpenAI
 from supabase import create_client
 from functools import lru_cache
 import os
+՝ ՝ ՝
 
 
 • Loads all required modules for FastAPI, environment, AI, Supabase, and caching.
