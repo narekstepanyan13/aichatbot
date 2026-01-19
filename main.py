@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
+from fastapi.responses import RedirectResponse
 from pydantic import BaseModel
 from dotenv import load_dotenv
 from openai import OpenAI
@@ -138,3 +140,33 @@ async def chat(req: ChatRequest):
         reply = "Sorry, there was an error generating a reply."
 
     return {"reply": reply}
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+@app.get("/index.html", include_in_schema=False)
+async def serve_index():
+    file_path = os.path.join(BASE_DIR, "index.html")
+    if os.path.exists(file_path):
+        return FileResponse(file_path)
+    else:
+        return {"error": "index.html file not found"}
+
+@app.get("/", include_in_schema=False)
+async def root_redirect():
+    return RedirectResponse(url="/index.html")
+
+@app.get("/style.css", include_in_schema=False)
+async def serve_css():
+    file_path = os.path.join(BASE_DIR, "style.css")
+    if os.path.exists(file_path):
+        return FileResponse(file_path)
+    else:
+        return {"error": "style.css file not found"}
+
+@app.get("/script.js", include_in_schema=False)
+async def serve_js():
+    file_path = os.path.join(BASE_DIR, "script.js")
+    if os.path.exists(file_path):
+        return FileResponse(file_path)
+    else:
+        return {"error": "script.js file not found"}
