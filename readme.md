@@ -12,30 +12,30 @@ This is the FastAPI backend for MovieLover AI, a professional assistant for movi
 main.py Explained
 1. Imports and Setup
 
-```python
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse, RedirectResponse
-from pydantic import BaseModel
-from dotenv import load_dotenv
-from openai import OpenAI
-from supabase import create_client
-from functools import lru_cache
-import os
-```
+    ```python
+    from fastapi import FastAPI
+    from fastapi.middleware.cors import CORSMiddleware
+    from fastapi.responses import FileResponse, RedirectResponse
+    from pydantic import BaseModel
+    from dotenv import load_dotenv
+    from openai import OpenAI
+    from supabase import create_client
+    from functools import lru_cache
+    import os
+    ```
 
 
-• Loads all required modules for FastAPI, environment, AI, Supabase, and caching.
+    • Loads all required modules for FastAPI, environment, AI, Supabase, and caching.
 
 2. Caching Embeddings
 
-```python
-@lru_cache(maxsize=128)
-def embed_query_cached(text: str) -> list[float]:
-    return embed_query(text)
-```
+    ```python
+    @lru_cache(maxsize=128)
+    def embed_query_cached(text: str) -> list[float]:
+        return embed_query(text)
+    ```
 
-Caches embedding results to avoid repeated API calls.
+    • Caches embedding results to avoid repeated API calls.
 
 3. Environment Variables & Clients
 
@@ -119,6 +119,7 @@ async def chat(req: ChatRequest):
 
 Workflow:
 
+```bash
 1. Receives user input
 
 2. Performs semantic search in Supabase
@@ -130,6 +131,8 @@ Workflow:
 5. Returns the reply as JSON
 
 10. Serve Frontend Files
+```
+
 ```python
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
