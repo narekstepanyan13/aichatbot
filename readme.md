@@ -60,15 +60,15 @@ main.py Explained
     """
     ```
        ### AI Behavior Guidelines
-            • Guides AI behavior:
+         • Guides AI behavior:
 
-            • Recommend max 5 movies
+         • Recommend max 5 movies
 
-            • Ask follow-ups if unclear
+         • Ask follow-ups if unclear
 
-            • Friendly and concise
+         • Friendly and concise
 
-            • No repeated suggestions
+         • No repeated suggestions
 
 5. Embedding Function
     ```python
