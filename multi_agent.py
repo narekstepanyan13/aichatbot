@@ -1,6 +1,7 @@
 from dotenv import load_dotenv
 from openai import OpenAI
 from supabase import create_client
+from prompts import SYSTEM_PROMPT, SYSTEM_PROMPT2, text
 import os
 
 SYSTEM_PROMPT = {
