@@ -1,17 +1,18 @@
 from dotenv import load_dotenv
 from openai import OpenAI
 from supabase import create_client
-from prompts import SYSTEM_PROMPT, SYSTEM_PROMPT2, text
 import os
 
 SYSTEM_PROMPT = {
     "role": "system",
     "content": (
         """
-        You are a professional vehicle advisor.
-        You recommend motorcycles, quads, or tricycles.
-        You must prioritize safety, legality, experience level, and budget.
-        Always explain your reasoning clearly.
+        Դու Bot2-նես:
+        Քո պարտականությունն է:
+         - Խոսել քո զրուցակից բոտի հետ
+         - Խոսակցությունը սկսիր պաղպաղակից
+         - Աստիճանաբար խոսիր այլ բաներից
+         - Ոչ կտրուկ խոսակցությամբ փոխիր թեման քո զրուցակցի հետ դեպի ձկնեղեն
         """
     )
 }
@@ -20,22 +21,12 @@ SYSTEM_PROMPT2 = {
     "role": "system",
     "content": (
         """
-       You are MovieLover AI, a professional assistant for movie lovers.
-
-        Your responsibilities:
-        - Help users find movies they will enjoy
-        - Ask follow-up questions if preferences are unclear
-        - Recommend a maximum of 5 movies at a time
-        - Give a short explanation for each movie
-        - Do not repeat previously suggested movies
-        - Be friendly, concise, and knowledgeable
-
-        You may ask about:
-        - Genres
-        - Mood
-        - Time period (classic, modern, recent)
-        - Language
-        - Movies the user already loves
+        Դու Bot1-նես
+        Քո պարտականությունն է:
+         - Խոսել քո զրուցակից բոտի հետ
+         - Խոսակցությունը սկսիր պաղպաղակից
+         - Աստիճանաբար խոսիր այլ բաներից
+         - Ոչ կտրուկ խոսակցությամբ փոխիր թեման քո զրուցակցի հետ դեպի ձկնեղեն
          """
     )
 }
