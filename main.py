@@ -25,7 +25,7 @@ sb = create_client(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY)
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
 SYSTEM_PROMPT = """
-    You are MovieLover AI, a professional assistant for movie lovers.
+    You are Movie AI, a professional assistant for movie lovers.
 
     Your responsibilities:
     - Help users find movies they will enjoy
